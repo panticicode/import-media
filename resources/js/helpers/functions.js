@@ -21,6 +21,17 @@ export const steps = ref(items)
 
 const mimeTypes = ['text/csv', 'application/vnd.ms-excel']
 
+const fileTypeError = (message) => {
+  // Check if the error message already exists
+  const errorExists = summary.value.some(error => error.messages.includes(message))
+
+  if (!errorExists) 
+  {
+  	summary.value.errors = []
+    summary.value.errors.push({ messages: [message] })
+  }
+}
+
 export const openModal = () => {
 	dialog.value = true // Opens the modal
 	removeCompletedClassList()
@@ -87,13 +98,7 @@ export const handleFileUpload = async (event) => {
 	{
 		if(files.length > 0)
 		{	
-			if (!summary.value.errors) 
-			{
-			    summary.value.errors = []
-			}
-			summary.value.errors.push({
-			    messages: ['File format not allowed. Allowed formats are CSV or XLS.']
-			})
+			fileTypeError('File format not allowed. Allowed formats are CSV or XLS.')
 		}
 	}
 }
@@ -108,13 +113,7 @@ export const handleFileDrop = async (event) => {
 	{
 		if(droppedFiles.length > 0)
 		{	
-			if (!summary.value.errors) 
-			{
-			    summary.value.errors = []
-			}
-			summary.value.errors.push({
-			    messages: ['File format not allowed. Allowed formats are CSV or XLS.']
-			})
+			fileTypeError('File format not allowed. Allowed formats are CSV or XLS.')
 		}
 	}
 }
