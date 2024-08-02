@@ -1,5 +1,7 @@
 # Import Media App with Jobs & Websockets
 
+This application allows users to import media files, process them through jobs, and receive real-time updates via websockets using Reberb.
+
 ## Project Setup
 
 ### 1. Clone this repo
