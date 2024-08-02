@@ -1,0 +1,79 @@
+/**Hide Overfow x in v-stepper header **/
+.v-stepper-header {
+  overflow-x: hidden !important;
+}
+/* Styles for the file drop area */
+.file-drop-area {
+  border: 2px dashed #ccc; /* Adds a dashed border with a light gray color */
+  padding: 20px; /* Adds padding inside the area */
+  text-align: center; /* Centers the text inside the area */
+  cursor: pointer; /* Changes the cursor to a pointer when hovering over the area */
+}
+
+/* Styles for error messages */
+.error-message {
+  color: red; /* Sets the text color to red for error messages */
+}
+
+/* Styles for the error container */
+.error-container {
+  border: 1px solid red; /* Adds a solid red border around the container */
+  padding: 10px; /* Adds padding inside the container */
+  border-radius: 4px; /* Rounds the corners of the container */
+  background-color: #fdd; /* Sets a light red background color */
+}
+
+/* Styles for stepper item titles */
+.v-stepper-item .v-stepper-item__title {
+  line-height: 2; /* Sets the line height for better spacing */
+  text-align: left; /* Aligns the text to the left */
+  font-size: 0.875rem;
+}
+
+/* Styles for subtitle following stepper item subtitles */
+.v-stepper-item .v-stepper-item__subtitle {
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+/* Sets the height of the stepper window to 40% of the viewport height and overflow-y scroll */
+.v-stepper-window {
+  height: 40vh;  
+  overflow-y: scroll !important;
+}
+
+/* Styles for stepper actions (navigation buttons) */
+.v-stepper .v-stepper-actions {
+  justify-content: end; /* Aligns the actions (buttons) to the end of the container */
+}
+
+.v-stepper-item:not(.v-stepper-item--error):not(.v-stepper-item--complete) .v-stepper-item__avatar.v-avatar,
+.v-stepper-item.v-stepper-item--selected:not(.v-stepper-item--error):not(.v-stepper-item--complete) .v-stepper-item__avatar.v-avatar {
+  background: transparent;
+  border: 3px solid #0fa30f;
+}
+
+/* Styles for the stepper item avatar for completed steps */
+.v-stepper-item.v-stepper-item--complete .v-stepper-item__avatar.v-avatar {
+  background: #005e00; /* Sets the background color to a dark green */
+}
+
+/* Styles for icons inside the stepper item avatar */
+.v-stepper-item__avatar.v-avatar .v-icon {
+  color: #fff; /* Sets the icon color to white */
+} 
+/* Change border color */
+.v-btn.v-btn--density-default.btn-back {
+  border: thin solid;
+}
+/**Styles for Error Stepper Icon**/
+.v-stepper-item--error .v-stepper-item__avatar.v-avatar .v-icon:before {
+  font-size: x-large
+}
+/**Styles for Loader**/
+.stepper-loader {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 100%;
+}
