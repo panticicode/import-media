@@ -11,23 +11,24 @@ This application allows users to import media files, process them through jobs, 
 composer install
 ```
 <img src="./git-images/composer.png" width="400">
-### 3. Make a copy of environment file
-Go to the app folder
 
-```sh
+## 3. Make a copy of environment file
+Go to the app folder
 cd /path/to/your/app/folder
-```
-Copy .env.example to .env:
+
+### Copy .env.example to .env:
 ```sh
 cp .env.example .env
 ```
 <img src="./git-images/env.png" width="400">
+
 ### 4. Run Database Migrations:
 ```sh
 php artisan migrate 
 ```
 During migration it will ask for create new database choose yes if db not exist
-<img src="./git-images/migrations.png" width="400">
+
+<img src="./git-images/migration.png" width="400">
 
 ### 5. Generate Key:
 ```sh
@@ -52,22 +53,13 @@ npm run build
 ```
 <img src="./git-images/npm-build.png" width="400">
 
-## For Development
-
-### Compile and Hot-Reload
-
-```sh
-npm run dev
-```
-<img src="./git-images/npm-dev.png" width="400">
-
 ## Running the Application
 
-### Real-Time Development
+### Real-Time Development, Compile and Hot-Reload
 
 To start the project and see changes in real-time, follow these steps:
 
-1. Open WAMP (or any other local development server).
+1. Open WAMP (or any other local development server you like).
 2. Open a terminal and start the PHP server:
 
 ```sh
@@ -116,6 +108,8 @@ If everything is set up correctly, you can access your application at:
 [http://localhost:8000](http://localhost:8000)
 
 That's all.
+
+<img src="./git-images/app.png" width="600">
 
 
 
