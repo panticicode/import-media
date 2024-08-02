@@ -9,6 +9,7 @@
     step,
     summary,
     isValid,
+    fileInput,
     previous,
     finished,
     steps,
@@ -112,7 +113,7 @@
                     <div class="error-container">
                       <ul>
                         <li v-for="msg in error.messages" :key="msg">
-                          <strong color="green">Row {{ error.row }}:</strong>
+                          <strong color="green" v-if="error.row">Row {{ error.row }}:</strong>
                           <span class="ms-2 error-message">{{msg}}</span>
                         </li>
                       </ul>

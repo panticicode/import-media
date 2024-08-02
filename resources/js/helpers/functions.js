@@ -83,6 +83,19 @@ export const handleFileUpload = async (event) => {
 	  file.value = files[0]
 	  await uploadFile()
 	}
+	else
+	{
+		if(files.length > 0)
+		{	
+			if (!summary.value.errors) 
+			{
+			    summary.value.errors = []
+			}
+			summary.value.errors.push({
+			    messages: ['File format not allowed. Allowed formats are CSV or XLS.']
+			})
+		}
+	}
 }
 
 export const handleFileDrop = async (event) => {
@@ -90,6 +103,19 @@ export const handleFileDrop = async (event) => {
 	if (droppedFiles.length > 0 && mimeTypes.includes(droppedFiles[0].type)) {
 	  file.value = droppedFiles[0]
 	  await uploadFile()
+	}
+	else
+	{
+		if(droppedFiles.length > 0)
+		{	
+			if (!summary.value.errors) 
+			{
+			    summary.value.errors = []
+			}
+			summary.value.errors.push({
+			    messages: ['File format not allowed. Allowed formats are CSV or XLS.']
+			})
+		}
 	}
 }
 
