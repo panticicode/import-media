@@ -23,6 +23,12 @@ cp .env.example .env
 php artisan migrate 
 ```
 
+### Generate Key:
+```sh
+php artisan key:generate 
+```
+INFO  Application key set successfully.
+
 ### Install NPM Dependencies:
 ```sh
 npm install
