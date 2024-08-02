@@ -25,7 +25,7 @@
     triggerFileInput,
     uploadFile,
     removeCompletedClassList
-  } from '../helpers/functions.js'
+  } from '@/helpers/functions.js'
 
   onMounted(() => {
     dialog.value = true

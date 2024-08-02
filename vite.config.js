@@ -13,6 +13,11 @@ export default defineConfig({
         vuetify({ autoImport: true }),
     ],
     build: {
-        chunkSizeWarningLimit: 1000, // Povećanje limita za veličinu čestica
+        chunkSizeWarningLimit: 1000, 
+    },
+    resolve: {
+        alias: {
+            '@': '/resources/js', 
+        },
     },
 });

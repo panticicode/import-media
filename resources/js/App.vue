@@ -1,5 +1,5 @@
 <script setup>
-import MediaImport from './pages/MediaImport.vue'
+import MediaImport from '@/pages/MediaImport.vue'
 </script>
 
 <template>

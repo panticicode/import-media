@@ -1,12 +1,12 @@
 import axios from 'axios'
-import App from './App.vue'
+import App from '@/App.vue'
 import { createApp } from 'vue'
 import { createVuetify } from 'vuetify'
 import 'vuetify/styles'
 import '@mdi/font/css/materialdesignicons.css'
 import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
-import './echo';
+import '@/echo';
 
 // CSRF Token setup
 const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content')
