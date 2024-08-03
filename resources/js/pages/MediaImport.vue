@@ -35,17 +35,9 @@
   watch(isValid, (newIsValid) => {
     if (previous.value) 
     {
-      if (step.value < 2 && newIsValid) 
+      if (newIsValid) 
       {
         nextStep()
-        finished.value = false
-      }
-      if (step.value >= 2 && newIsValid) 
-      {
-        setTimeout(() => {
-          nextStep()
-          finished.value = true
-        }, 1000)
       }
     }
   })
@@ -169,8 +161,7 @@
                 class="me-2 white--text btn-back"
                 outlined
                 text="Back"
-                @click="backStep"
-                :disabled="finished || isValid">
+                @click="backStep">
               </v-btn>
             </template>
             <template #next>
@@ -179,7 +170,7 @@
                 color="white"
                 text="Next"
                 @click="nextStep"
-                :disabled="isValid && step >= 1">
+                :disabled="isValid && step === 1 || step === 3">
               </v-btn>
             </template>
         </v-stepper-actions> 

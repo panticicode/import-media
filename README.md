@@ -2,9 +2,32 @@
 
 This application allows users to import media files, process them through jobs, and receive real-time updates via websockets using Reberb.
 
+## Prerequisites
+
+To run this web application, you need to have the following software installed:
+
+- PHP 8.1+
+- Node.js 20+
+- npm 10+
+- MySQL 8+
+- Web Server (Apache2, Nginx, or any other web server)
+
+<img src="./git-images/prerequisites.png" width="400">
+
 ## Project Setup
 
 ### 1. Clone this repo
+
+for https use
+
+```sh
+git clone https://github.com/panticicode/import-media.git
+```
+for ssh use
+
+```sh
+git clone git@github.com:panticicode/import-media.git
+```
 
 ### 2. Install Composer Dependencies:
 ```sh

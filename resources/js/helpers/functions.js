@@ -9,7 +9,7 @@ export const summary   = ref([]) // Stores the summary of errors and other data
 export const isValid   = ref(false) // Indicates if the current state is valid
 export const fileInput = ref(null) // Reference to the file input element
 export const previous  = ref(true) // Indicates if the previous button should be enabled
-export const finished  = ref(true) // Indicates if the process is finished
+export const finished  = ref(false) // Indicates if the process is finished
 
 // Array defining the steps in the process
 const items = [
@@ -49,8 +49,10 @@ export const closeModal = () => {
   dialog.value = false
   step.value = 0
   isValid.value = false
-  steps.value.forEach(item => {
-    if (!item.valid) {
+  
+  steps.value.forEach((item, index) => {
+    if(item.value < 3)
+    {
       item.valid = true
     }
   })
@@ -59,6 +61,10 @@ export const closeModal = () => {
 // Moves to the previous step, marks the current step as valid, and updates button states
 export const backStep = () => {
   step.value--
+  if (finished && step.value >= 2) 
+  {
+    step.value--
+  }
   isValid.value = true
   previous.value = false
   removeCompletedClassList(step.value + 1)
@@ -66,20 +72,23 @@ export const backStep = () => {
 
 // Moves to the next step if the current state is valid and updates button states
 export const nextStep = () => {
-  if (validate()) {
+  if (validate()) 
+  {
     step.value++
   }
-  isValid.value = false
+  isValid.value = finished.value
 
-  if (step.value >= 2) {
-    isValid.value = true
-  }
   previous.value = true
 }
 
 // Validates the current step and updates step validity
 const validate = () => {
   removeCompletedClassList(step.value + 1)
+ 
+  if(step.value === 3)
+  {
+    return false
+  }
   return steps.value[step.value] && (steps.value[step.value].valid = isValid.value)
 }
 
@@ -89,10 +98,13 @@ export const downloadTemplate = async () => {
 
   try {
     const response = await axios.get(templateUrl, { responseType: 'blob' })
-    if (response.status === 200 && mimeTypes.includes(response.data.type)) {
+    if (response.status === 200 && mimeTypes.includes(response.data.type)) 
+    {
       saveAs(response.data, 'template.csv')
       isValid.value = true
-    } else {
+    } 
+    else 
+    {
       console.error('File does not exist or unsupported MIME type.')
     }
   } catch (error) {
@@ -103,11 +115,20 @@ export const downloadTemplate = async () => {
 // Handles file upload events and validates file format
 export const handleFileUpload = async (event) => {
   const files = event.target.files
-  if (files.length > 0 && mimeTypes.includes(files[0].type)) {
+  if (files.length > 0 && mimeTypes.includes(files[0].type)) 
+  {
     file.value = files[0]
-    await uploadFile()
-  } else {
-    if (files.length > 0) {  
+    const response = await uploadFile()
+    
+    if(response.status === 200)
+    {
+      isValid.value = true
+    }
+  } 
+  else 
+  {
+    if (files.length > 0) 
+    {  
       fileTypeError('File format not allowed. Allowed formats are CSV or XLS.')
     }
   }
@@ -116,11 +137,20 @@ export const handleFileUpload = async (event) => {
 // Handles file drop events and validates file format
 export const handleFileDrop = async (event) => {
   const droppedFiles = event.dataTransfer.files
-  if (droppedFiles.length > 0 && mimeTypes.includes(droppedFiles[0].type)) {
+  if (droppedFiles.length > 0 && mimeTypes.includes(droppedFiles[0].type)) 
+  {
     file.value = droppedFiles[0]
-    await uploadFile()
-  } else {
-    if (droppedFiles.length > 0) {  
+    const response = await uploadFile()
+
+    if(response.status === 200)
+    {
+      isValid.value = true
+    }
+  } 
+  else 
+  {
+    if (droppedFiles.length > 0) 
+    {  
       fileTypeError('File format not allowed. Allowed formats are CSV or XLS.')
     }
   }
@@ -143,25 +173,63 @@ export const uploadFile = async () => {
       headers: { 'Content-Type': 'multipart/form-data' }
     })
 
-    if (response.status === 200) {
+    if (response.status === 200) 
+    {
       window.Echo.channel('import-media').listen('ImportMedia', async (e) => {
         summary.value = e.summary
-        isValid.value = !summary.value.errors
-      })
+        isValid.value = !e.summary.errors
+        finished.value = true
+
+        setTimeout(() => {
+          nextStep()
+          if(!!e.summary.errors)
+          {
+            removeCompletedClassList(1)
+            steps.value[1].valid = !e.summary.errors
+          }
+          else
+          {
+            addCompletedClassList(2)
+            isValid.value = true
+          }
+        }, 750)
+      })  
     }
+    return response
   } catch (error) {
     console.error('Error uploading file:', error.response?.data || error.message)
   }
 }
 
-// Removes the completed class from stepper items, optionally for a specific step
+// Adds the completed class to stepper items for a specific step if not already present
+const addCompletedClassList = (key) => {
+  setTimeout(() => {
+    const steppers = document.querySelectorAll('.v-stepper-item')
+    if (steppers[key] && !steppers[key].classList.contains('v-stepper-item--complete')) {
+      steppers[key].classList.add('v-stepper-item--complete')
+    }
+  }, 0)
+}
+
+// Removes the completed class from stepper items optionally for a specific step if it exists
 export const removeCompletedClassList = (key = null) => {
   setTimeout(() => {
     const steppers = document.querySelectorAll('.v-stepper-item')
-    if (key !== null) {
-      steppers[key]?.classList.remove('v-stepper-item--complete')
-    } else {
-      steppers.forEach(item => item.classList.remove('v-stepper-item--complete'))
+    if (key !== null) 
+    {
+      if (steppers[key] && steppers[key].classList.contains('v-stepper-item--complete')) 
+      {
+        steppers[key].classList.remove('v-stepper-item--complete')
+      }
+    } 
+    else 
+    {
+      steppers.forEach(item => {
+        if (item.classList.contains('v-stepper-item--complete')) 
+        {
+          item.classList.remove('v-stepper-item--complete')
+        }
+      })
     }
   }, 0)
 }
