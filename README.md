@@ -12,7 +12,7 @@ To run this web application, you need to have the following software installed:
 - MySQL 8+
 - Web Server (Apache2, Nginx, or any other web server)
 
-<img src="./git-images/prerequisites.png" width="400">
+<img src="./git-images/prerequisites.png" width="600">
 
 ## Project Setup
 
@@ -33,7 +33,7 @@ git clone git@github.com:panticicode/import-media.git
 ```sh
 composer install
 ```
-<img src="./git-images/composer.png" width="400">
+<img src="./git-images/composer.png" width="600">
 
 ## 3. Make a copy of environment file
 Go to the app folder
@@ -43,7 +43,7 @@ cd /path/to/your/app/folder
 ```sh
 cp .env.example .env
 ```
-<img src="./git-images/env.png" width="400">
+<img src="./git-images/env.png" width="600">
 
 ### 4. Run Database Migrations:
 ```sh
@@ -51,19 +51,19 @@ php artisan migrate
 ```
 During migration it will ask for create new database choose yes if db not exist
 
-<img src="./git-images/migration.png" width="400">
+<img src="./git-images/migration.png" width="600">
 
 ### 5. Generate Key:
 ```sh
 php artisan key:generate 
 ```
-<img src="./git-images/generate-key.png" width="400">
+<img src="./git-images/generate-key.png" width="600">
 
 ### 6. Install NPM Dependencies:
 ```sh
 npm install
 ```
-<img src="./git-images/npm-install.png" width="400">
+<img src="./git-images/npm-install.png" width="600">
 
 ## For Production
 
@@ -74,7 +74,7 @@ To compile and minify the application for production, run:
 ```sh
 npm run build
 ```
-<img src="./git-images/npm-build.png" width="400">
+<img src="./git-images/npm-build.png" width="600">
 
 ## Running the Application
 
@@ -89,7 +89,7 @@ To start the project and see changes in real-time, follow these steps:
 php artisan serve
 ```
 
-<img src="./git-images/serve.png" width="400">
+<img src="./git-images/serve.png" width="600">
 
 3. In a separate terminal, run:
 
@@ -97,7 +97,7 @@ php artisan serve
 npm run dev
 ```
 
-<img src="./git-images/npm-dev.png" width="400">
+<img src="./git-images/npm-dev.png" width="600">
 
 ### Running Websockets & Queue
 
@@ -106,7 +106,7 @@ To start the websockets, follow these steps:
 ```sh
 php artisan reverb:start
 ```
-<img src="./git-images/reverb.png" width="400">
+<img src="./git-images/reverb.png" width="600">
 
 4. In another terminal, run:
 
@@ -114,7 +114,7 @@ php artisan reverb:start
 php artisan queue:work
 ```
 
-<img src="./git-images/queue.png" width="400">
+<img src="./git-images/queue.png" width="600">
 
 ## Environment Configuration
 
